@@ -1,5 +1,5 @@
 import 'package:demoapp/dataClear/DataClearButton.dart';
-import 'package:demoapp/dataClear/SaleScrean.dart';
+
 import 'package:demoapp/inputBox/InputBox.dart';
 import 'package:demoapp/paymentMethod/PrintReceiptButton.dart';
 import 'package:demoapp/paymentMethod/generatePdf.dart';

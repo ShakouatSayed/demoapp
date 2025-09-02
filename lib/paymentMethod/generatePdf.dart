@@ -5,7 +5,7 @@ import 'package:printing/printing.dart';
 Future<void> generatePdf(List<Map<String, dynamic>> orders) async{
   final pdf = pw.Document();
   final fontData = await rootBundle.load("assets/fonts/SolaimanLipi.ttf");
-  final ttf = pw.Font.ttf(fontData.buffer.asByteData());
+  //final ttf = pw.Font.ttf(fontData.buffer.asByteData());
 
   double total = orders.fold(
     0,
