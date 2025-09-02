@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "405279496499",
+    "project_id": "recivemail-916f1",
+    "storage_bucket": "recivemail-916f1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405279496499:android:373e133a8bd9639c3f0646",
+        "android_client_info": {
+          "package_name": "com.example.demoapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfztL8tONepJoXsxExX6Xl6uFOCFS-UWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

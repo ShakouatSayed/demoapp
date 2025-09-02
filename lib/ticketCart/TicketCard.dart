@@ -1,3 +1,5 @@
+import 'package:demoapp/paymentScreen/PaymentScreen.dart';
+import 'package:demoapp/ticketCart/BottomBar.dart';
 import 'package:flutter/material.dart';
 
 class TicketCard extends StatelessWidget {
@@ -8,8 +10,10 @@ class TicketCard extends StatelessWidget {
   Widget build(BuildContext context) {
     double total = orders.fold(
       0,
-      (sum, item) => sum + (item["cost"] * item["cost"]),
+      (sum, item) => sum + (item["cost"] * item["qty"]),
     );
+
+    //WidgetsBinding.instance.addPostFrameCallback((_){onTotalCalculated(total);});
     return Scaffold(
       appBar: AppBar(title: Text("Ticket"), backgroundColor: Colors.green),
       body: Padding(
@@ -50,24 +54,9 @@ class TicketCard extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        color: Colors.green,
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("Save", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white12)),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text("Charge", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                Text("Tk $total", style: TextStyle(color: Colors.white)),
-              ],
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: BottomBar(total: total, onSave: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentScreen(total: total, orders: orders)));
+      })
     );
   }
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TickChargeBar extends StatelessWidget{
-  const TickChargeBar({super.key});
+  final double total;
+  const TickChargeBar({super.key, required this.total});
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +27,15 @@ class TickChargeBar extends StatelessWidget{
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                     ),
-                    TextButton(
-                      onPressed: (){
-                      },
-                      child: Text("CHARGE TK 0.0",
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                    Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text("Charge", style: TextStyle(color: Colors.white, fontSize: 16)),
+                          Text("Tk ${total.toStringAsFixed(2)}", style: TextStyle(color: Colors.white)),
+                        ],
                       ),
-                    ),
+
                   ],
                 ),
               ),
