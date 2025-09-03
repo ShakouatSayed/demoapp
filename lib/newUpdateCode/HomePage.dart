@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
     {"name": "Beef Vuna", "image": "assets/beef_vuna.jpg", "cost": 200.0},
     {"name": "Chicken Grill", "image": "assets/chicken_grill.jpg", "cost": 150.0},
     {
-      "name": "Chicken Masalaা",
+      "name": "Chicken Masala",
       "image": "assets/chicken_masala.jpg",
       "cost": 120.0,
     },
@@ -44,6 +44,16 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    //Responsive Sizing
+    final padding = screenWidth * 0.020;
+    final mainAxisSpacing = screenHeight * 0.01;
+    final crossAxisSpacing = screenWidth * 0.02;
+
+    final crossAxisCount = screenWidth < 600 ? 2 : 3;
+    final childAspectRatio = screenWidth < 600 ? 0.75 : (screenWidth / screenHeight) * 0.10;
 
     return Scaffold(
       appBar: ProductAppBar(
@@ -59,21 +69,21 @@ class _HomePageState extends State<HomePage> {
       ),
       drawer: Drawer(),
       body: SafeArea(
-        minimum: EdgeInsets.only(bottom: 20),
+        minimum: EdgeInsets.only(bottom: screenHeight * 0.02),
         child: Column(
           children: [
-            SizedBox(width: 8),
+            SizedBox(width: screenWidth * 0.01),
             TickChargeBar(total: totalCost),
 
             // filter + search
             FilterSearchBox(),
             Expanded(child: GridView.builder(
-              padding: const EdgeInsets.all(8),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.8,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
+              padding: EdgeInsets.all(padding),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                childAspectRatio: childAspectRatio,
+                mainAxisSpacing: mainAxisSpacing,
+                crossAxisSpacing: crossAxisSpacing,
               ),
               itemCount: menuItems.length,
               itemBuilder: (context, index) {
@@ -91,4 +101,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+
 }

@@ -6,17 +6,30 @@ class TickChargeBar extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    // Responsive sizing
+    final sizeBoxHeight = screenHeight * 0.015;
+    final horizontalPadding = screenWidth * 0.03;
+    final verticalPadding = screenHeight * 0.01;
+    final containerPadding = screenWidth * 0.03;
+    final borderRadius = screenWidth * 0.015;
+    final fontSizeMediam = screenWidth * 0.04;
+    final fontSizeSmall = screenWidth * 0.035;
+
+
     return Column(
         children: [
-          SizedBox(height: 12),
+          SizedBox(height: sizeBoxHeight),
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+              padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: verticalPadding),
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.green,
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(borderRadius),
                 ),
-                padding:  EdgeInsets.all(12),
+                padding:  EdgeInsets.all(containerPadding),
                 child: Row(
                   mainAxisAlignment:  MainAxisAlignment.spaceBetween,
                   children: [
@@ -24,15 +37,15 @@ class TickChargeBar extends StatelessWidget{
                       onPressed: (){
                       },
                       child: Text("Open TICKETS",
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        style: TextStyle(color: Colors.white, fontSize: fontSizeMediam),
                       ),
                     ),
                     Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text("Charge", style: TextStyle(color: Colors.white, fontSize: 16)),
-                          Text("Tk ${total.toStringAsFixed(2)}", style: TextStyle(color: Colors.white)),
+                          Text("Charge", style: TextStyle(color: Colors.white, fontSize: fontSizeMediam)),
+                          Text("Tk ${total.toStringAsFixed(2)}", style: TextStyle(color: Colors.white, fontSize: fontSizeSmall)),
                         ],
                       ),
 

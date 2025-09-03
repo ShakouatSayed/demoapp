@@ -1,21 +1,35 @@
-import 'dart:ffi';
+//import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 
 class FilterSearchBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    // Responsive Sizing
+    final horPad = screenWidth * 0.03;
+    final verPad = screenHeight * 0.01;
+    final conPad = screenWidth * 0.01;
+    final borRad = screenWidth * 0.015;
+    final dropConPad = screenWidth * 0.02;
+    final sizeBoxLar = screenWidth * 0.05;
+    final sizeBoxSam = screenWidth * 0.025;
+    final iconBotRad = screenWidth * 0.012;
+    final iconSize = screenWidth * 0.06;
+
     return Column(
       children: [
         //SizedBox(height: 4),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+          padding: EdgeInsets.symmetric(horizontal: horPad, vertical: verPad),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.black12,
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(borRad),
             ),
-            padding:  EdgeInsets.all(4),
+            padding:  EdgeInsets.all(conPad),
             child: Row(
               mainAxisAlignment:  MainAxisAlignment.spaceBetween,
               children: [
@@ -28,17 +42,17 @@ class FilterSearchBox extends StatelessWidget {
                         .toList(),
                     onChanged: (val) {},
 
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 8),
+                    contentPadding: EdgeInsets.symmetric(horizontal: dropConPad),
                      ),
                   ),
                 ),
 
-                SizedBox(width: 20),
-                _iconBox(Icons.qr_code_scanner_rounded,(){}),
-                SizedBox(width: 10),
-                _iconBox(Icons.search,(){}),
+                SizedBox(width: sizeBoxLar),
+                _iconBox(Icons.qr_code_scanner_rounded,(){}, iconBotRad, iconSize),
+                SizedBox(width: sizeBoxSam),
+                _iconBox(Icons.search,(){}, iconBotRad, iconSize),
                 /*
                 //Filter Icom
                 Container(
@@ -78,13 +92,13 @@ class FilterSearchBox extends StatelessWidget {
     );
   }
 
-  Widget _iconBox(IconData icon,VoidCallback onTap){
+  Widget _iconBox(IconData icon,VoidCallback onTap, double borderRadius, double iconSize){
     return Container(
       decoration: BoxDecoration(
         //border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(borderRadius),
       ),
-      child: IconButton(icon: Icon(icon),onPressed: onTap),
+      child: IconButton(icon: Icon(icon, size: iconSize,),onPressed: onTap),
     );
   }
 }

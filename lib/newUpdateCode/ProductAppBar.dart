@@ -8,6 +8,16 @@ class ProductAppBar extends StatelessWidget implements PreferredSizeWidget{
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    // Responsive sizing
+    final padding = screenWidth * 0.015;
+    final fontSize = screenWidth * 0.035;
+    final borderRadius = screenWidth * 0.03;
+    final right = screenWidth * 0.015;
+    final top = screenHeight * 0.015;
+
     return AppBar(
       backgroundColor: Colors.green,
       title: Text("Ticket"),
@@ -29,20 +39,20 @@ class ProductAppBar extends StatelessWidget implements PreferredSizeWidget{
               onPressed: onCartPressed),
             if(cartCount > 0)
               Positioned(
-              right: 6,
-              top: 8,
+              right: right,
+              top: top,
               child: Container(
-                padding: EdgeInsets.all(4),
+                padding: EdgeInsets.all(padding),
                 decoration: BoxDecoration(
                   color: Colors.red,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(borderRadius),
                 ),
-                constraints: BoxConstraints(minWidth: 18, minHeight: 18),
+                constraints: BoxConstraints(minWidth: screenWidth * 0.045, minHeight: screenWidth * 0.045),
                 child: Text(
                   "$cartCount",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 12,
+                    fontSize: fontSize,
                     fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.center,

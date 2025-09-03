@@ -27,6 +27,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
     const bg = Color(0xFFF4F6FA);
+    final size = MediaQuery.of(context).size;
+    final height = size.height;
+    final width = size.width;
+
     return Scaffold(
       backgroundColor: bg,
       appBar: AppBar(
@@ -35,43 +39,45 @@ class _PaymentScreenState extends State<PaymentScreen> {
         actions: [
           TextButton(
             onPressed: () {},
-            child: const Text(
+            child: Text(
               "SPLIT",
-              style: TextStyle(color: Colors.white, letterSpacing: 1.1),
+              style: TextStyle(color: Colors.white, letterSpacing: 1.1, fontSize: width * 0.04),
             ),
           ),
         ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: width * 0.05),
           child: Column(
             //crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 24),
+              SizedBox(height: height * 0.03),
               Text(
                 "Tk ${widget.total.toStringAsFixed(2)}",
-                style: const TextStyle(
-                  fontSize: 28,
+                style: TextStyle(
+                  fontSize: width * 0.08,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              const SizedBox(height: 6),
-              const Text(
+              SizedBox(height: height * 0.01),
+              Text(
                 "Total amount due",
-                style: TextStyle(color: Colors.black54),
+                style: TextStyle(color: Colors.black54, fontSize: width * 0.045),
+
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: height * 0.03),
 
               // Cash recived
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+              Align(
+                alignment: Alignment.topLeft,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "Cash recived",
-                      style: TextStyle(color: Colors.black54),
-                      textAlign: TextAlign.start,
+                      style: TextStyle(color: Colors.black54, fontSize: width * 0.045),
+                      //textAlign: TextAlign.start,
                     ),
                     /*TextField(
                         controller: cashCtr1,
@@ -84,19 +90,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.blue, width: 2)),
                         ),
                       )*/
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Tk ${widget.total.toStringAsFixed(2)}",
-                        style: TextStyle(color: Colors.black54),
-                      ),
+                    SizedBox(height: height * 0.005),
+                    Text(
+                      "Tk ${widget.total.toStringAsFixed(2)}",
+                      style: TextStyle(color: Colors.black54, fontSize: width * 0.05),
                     ),
                   ],
                 ),
               ),
 
-              const SizedBox(height: 16),
-              _sectionGap(),
+              SizedBox(height: height * 0.02),
+              _sectionGap(height),
 
               // Payment methods
               _methodTile(
@@ -105,16 +109,18 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 onTap: () {
                   /*handle cash*/
                 },
+                fontSize: width * 0.045,
               ),
-              _sectionGap(),
+              _sectionGap(height),
               _methodTile(
                 icon: Icons.credit_card,
                 label: "CARD",
                 onTap: () {
                   /*handle card*/
                 },
+                fontSize: width * 0.045,
               ),
-              _sectionGap(),
+              _sectionGap(height),
               _methodTile(
                 icon: Icons.account_balance_wallet_outlined,
                 label: "BKASH",
@@ -127,16 +133,18 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ),
                   );
                 },
+                fontSize: width * 0.045,
               ),
-              _sectionGap(),
+              _sectionGap(height),
               _methodTile(
                 icon: Icons.account_balance_wallet,
                 label: "NAGAD",
                 onTap: () {
                   /*handle nagad*/
                 },
+                fontSize: width * 0.045,
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: height * 0.04),
             ],
           ),
         ),
@@ -144,9 +152,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 
-  Widget _sectionGap() => Container(
-    height: 12,
-    margin: const EdgeInsets.symmetric(vertical: 8),
+  Widget _sectionGap(double height) => SizedBox(
+    height: height * 0.02,
     //color: Colors.white,
   );
 
@@ -155,19 +162,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
     required IconData icon,
     required String label,
     required VoidCallback onTap,
+    required double fontSize,
   }) {
     return ListTile(
-      leading: Icon(icon),
-      title: Text(label, style: TextStyle(letterSpacing: 1.0)),
+      leading: Icon(icon, size: fontSize * 1.2),
+      title: Text(label, style: TextStyle(letterSpacing: 1.0, fontSize: fontSize)),
       tileColor: Colors.white,
-      contentPadding: const EdgeInsets.only(
-        top: 0,
-        bottom: 0,
-        left: 8,
-        right: 8,
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: MediaQuery.of(context).size.width * 0.02,
+        vertical: MediaQuery.of(context).size.height * 0.005,
+
       ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(MediaQuery.of(context).size.width * 0.04),
         //side: BorderSide(color: Colors.green, width: 1)
       ),
       onTap: onTap,

@@ -14,6 +14,10 @@ class PaymentSuccessPage extends StatelessWidget {
   const PaymentSuccessPage({super.key, required this.total, required this.orders});
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
     return Scaffold(
       appBar: ProductAppBar(
         cartCount: HomePage.cart.length,
@@ -22,57 +26,60 @@ class PaymentSuccessPage extends StatelessWidget {
 
       drawer: Drawer(),
       body: SafeArea(
-        minimum: EdgeInsets.only(bottom: 20),
-        child: Column(
-          //mainAxisSize: MainAxisSize.min,
-          //mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 20),
-            Center(
-              child: Text(
-                "Tk ${total.toStringAsFixed(2)}",
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black12,
+        minimum: EdgeInsets.only(bottom: height * 0.02),
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+          child: Column(
+            //mainAxisSize: MainAxisSize.min,
+            //mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: height * 0.02),
+              Center(
+                child: Text(
+                  "Tk ${total.toStringAsFixed(2)}",
+                  style: TextStyle(
+                    fontSize: width * 0.08,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black12,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(width: 8),
-            Text(
-              "Total Paid",
-              style: TextStyle(fontSize: 18, color: Colors.black54),
-            ),
-            const SizedBox(height: 100),
-            InputBox(
-              hintText: "Enter email",
-              prefixIcon: Icons.mail,
-              suffixIcon: Icons.send_rounded,
-              inputType: TextInputType.emailAddress,
-              onAction: (value) {
-                debugPrint("Email : $value");
-              },
-            ),
-            const SizedBox(height: 10),
-            // InputBox(
-            //   hintText: "Enter phone",
-            //   prefixIcon: Icons.phone,
-            //   suffixIcon: Icons.check,
-            //   inputType: TextInputType.phone,
-            //   prefixBgColor: Colors.blueGrey,
-            //   suffixColor: Colors.green,
-            //   onAction: (value) {
-            //     debugPrint("phone : $value");
-            //   },
-            // ),
-            PrintReceiptButton(onPressed: () async {await generatePdf(orders);}),
-            const SizedBox(height: 150),
-            //SaleScrean(orders: orders),
-            DataClearButton(onConfirm: (){
-              HomePage.cart.clear();
-              debugPrint("Cart is clear!");
-            }, homePageBuilder:(_) => const HomePage())
-          ],
+              SizedBox(width: height * 0.01),
+              Text(
+                "Total Paid",
+                style: TextStyle(fontSize: width * 0.045, color: Colors.black54),
+              ),
+              SizedBox(height: height * 0.15),
+              InputBox(
+                hintText: "Enter email",
+                prefixIcon: Icons.mail,
+                suffixIcon: Icons.send_rounded,
+                inputType: TextInputType.emailAddress,
+                onAction: (value) {
+                  debugPrint("Email : $value");
+                },
+              ),
+              SizedBox(height: height * 0.01),
+              // InputBox(
+              //   hintText: "Enter phone",
+              //   prefixIcon: Icons.phone,
+              //   suffixIcon: Icons.check,
+              //   inputType: TextInputType.phone,
+              //   prefixBgColor: Colors.blueGrey,
+              //   suffixColor: Colors.green,
+              //   onAction: (value) {
+              //     debugPrint("phone : $value");
+              //   },
+              // ),
+              PrintReceiptButton(onPressed: () async {await generatePdf(orders);}),
+              SizedBox(height: height * 0.35),
+              //SaleScrean(orders: orders),
+              DataClearButton(onConfirm: (){
+                HomePage.cart.clear();
+                debugPrint("Cart is clear!");
+              }, homePageBuilder:(_) => const HomePage())
+            ],
+          ),
         ),
       ),
     );
